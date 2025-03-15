@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://csqu55gg3yopn"]
+[gd_scene load_steps=16 format=3 uid="uid://csqu55gg3yopn"]
 
 [ext_resource type="Texture2D" uid="uid://w60byu3yb587" path="res://Sprites/222_.png" id="1_i04dx"]
-[ext_resource type="Script" uid="uid://0a65j6xfwu6o" path="res://Scripts/player.gd" id="2_8pvmw"]
-[ext_resource type="Script" uid="uid://du1k1q0nmppri" path="res://Scripts/head.gd" id="3_vnucn"]
+[ext_resource type="PackedScene" uid="uid://bkg3tistv4aru" path="res://Scenes/player.tscn" id="2_c3mwy"]
+[ext_resource type="PackedScene" uid="uid://c1bltlw2c1k8g" path="res://Scenes/door.tscn" id="4_4g5cr"]
+[ext_resource type="Script" uid="uid://chvi7hbnxquca" path="res://Scripts/ui.gd" id="4_c3mwy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vnucn"]
 albedo_texture = ExtResource("1_i04dx")
@@ -13,10 +14,6 @@ material = SubResource("StandardMaterial3D_vnucn")
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_8pvmw"]
 data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4g5cr"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_ckhy6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i04dx"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -31,36 +28,51 @@ sky = SubResource("Sky_8pvmw")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="Gradient" id="Gradient_c3mwy"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 0.270588)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_c3mwy"]
+gradient = SubResource("Gradient_c3mwy")
+
+[sub_resource type="Gradient" id="Gradient_4g5cr"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ckhy6"]
+gradient = SubResource("Gradient_4g5cr")
+
+[sub_resource type="LabelSettings" id="LabelSettings_dun2r"]
+font_size = 26
+
 [node name="Root" type="Node3D"]
 
-[node name="Plane" type="StaticBody3D" parent="."]
+[node name="World" type="Node" parent="."]
+
+[node name="Plane" type="StaticBody3D" parent="World"]
 transform = Transform3D(4000, 0, 0, 0, 4000, 0, 0, 0, 4000, 0, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Plane"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Plane"]
 mesh = SubResource("PlaneMesh_c3mwy")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Plane"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Plane"]
 shape = SubResource("ConcavePolygonShape3D_8pvmw")
 
-[node name="Player" type="CharacterBody3D" parent="."]
+[node name="CSGBox3D" type="CSGBox3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.13036, 3.52972, -9.70691)
+use_collision = true
+size = Vector3(17.3379, 7.1615, 1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="World/CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.984771, -0.6819, -0.2154)
+operation = 2
+size = Vector3(4.8811, 6.10614, 2.40771)
+
+[node name="Door" parent="World" instance=ExtResource("4_4g5cr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.55027)
+
+[node name="Player" parent="." instance=ExtResource("2_c3mwy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18854, 0)
-script = ExtResource("2_8pvmw")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-shape = SubResource("CapsuleShape3D_4g5cr")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
-mesh = SubResource("CapsuleMesh_ckhy6")
-
-[node name="Head" type="Node3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.536, 0)
-script = ExtResource("3_vnucn")
-
-[node name="Camera3D" type="Camera3D" parent="Player/Head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00048399, 0)
-
-[node name="RayCast3D" type="RayCast3D" parent="Player/Head"]
-target_position = Vector3(0, 0, -3.5)
 
 [node name="Enviroment" type="Node" parent="."]
 
@@ -71,17 +83,59 @@ environment = SubResource("Environment_vnucn")
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.13036, 3.52972, -9.70691)
-use_collision = true
-size = Vector3(17.3379, 7.1615, 1)
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("player")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_c3mwy")
+player = NodePath("../Player")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.984771, -0.6819, -0.2154)
-operation = 2
-size = Vector3(4.8811, 6.10614, 2.40771)
+[node name="Crosshair" type="TextureRect" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.9999
+offset_top = -5.0
+offset_right = 232.0
+offset_bottom = 251.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.03, 0.03)
+texture = SubResource("GradientTexture1D_c3mwy")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="." groups=["Door"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.14559, 2.84782, -9.92231)
-operation = 2
-size = Vector3(4.8811, 6.10614, 2.40771)
+[node name="OnHover" type="Control" parent="UI"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -4.0
+offset_right = 16.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Crosshair2" type="TextureRect" parent="UI/OnHover"]
+layout_mode = 1
+offset_right = 256.0
+offset_bottom = 256.0
+scale = Vector2(0.03, 0.03)
+texture = SubResource("GradientTexture1D_ckhy6")
+
+[node name="Label" type="Label" parent="UI/OnHover"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 8.0
+offset_right = 328.0
+offset_bottom = 85.0
+text = "E INTERACT"
+label_settings = SubResource("LabelSettings_dun2r")

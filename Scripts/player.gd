@@ -1,5 +1,8 @@
 extends CharacterBody3D
 
+signal OnHoverUpdateStart
+signal OnHoverUpdateEnd
+
 @export var move_speed : float = 5.0
 @export var gravity : float = 15.0
 @export var jump_velocity : float = 9.0
