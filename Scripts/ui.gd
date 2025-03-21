@@ -1,6 +1,7 @@
 extends Control
 
 var target_scores : Array = [5, 25, 100, 500]
+var i = 0
 
 @export var door: CSGBox3D
 @export var player: CharacterBody3D
@@ -25,7 +26,6 @@ func _ready():
 func update_score():
 	score.text = str("Score: ", GameManager.score)
 	
-	var i = 0
 	if GameManager.score >= target_scores[i]:
 		i += 1
 		slots.visible = true

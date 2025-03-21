@@ -43,8 +43,9 @@ material_override = ExtResource("3_qxdwn")
 transform = Transform3D(-17.3186, 1.51369e-06, 7.53175e-13, 0, -7.56845e-07, 2.42122, 1.51404e-06, 17.3146, 1.05835e-07, 4.28034, 0.019926, -0.557428)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
-material_override = ExtResource("3_qxdwn")
+transparency = 0.6
 mesh = SubResource("QuadMesh_c3mwy")
+surface_material_override/0 = ExtResource("3_qxdwn")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
 shape = SubResource("ConcavePolygonShape3D_c3mwy")

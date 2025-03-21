@@ -33,19 +33,22 @@ operation = 2
 size = Vector3(4.8811, 6.10614, 2.40771)
 
 [node name="Wall" parent="." instance=ExtResource("2_idjqp")]
-transform = Transform3D(-7.5702e-07, 0, -2.42122, 0, 7.00689, 0, 17.3186, 0, -1.05835e-07, 12.2431, 3.28658, -0.478575)
+transform = Transform3D(-7.5702e-07, 0, -2.42122, 0, 7.00689, 0, 17.3186, 0, -1.05835e-07, 8.39464, 3.28658, -0.478575)
 
 [node name="MeshInstance3D" parent="Wall" index="0"]
 material_override = SubResource("StandardMaterial3D_dun2r")
 
 [node name="Wall2" parent="." instance=ExtResource("2_idjqp")]
-transform = Transform3D(-7.5702e-07, 0, 2.42122, 0, 7.00689, 0, -17.3186, 0, -1.05835e-07, -4.39565, 3.28658, -0.53594)
+transform = Transform3D(-7.5702e-07, 0, 2.42122, 0, 7.00689, 0, -17.3186, 0, -1.05835e-07, -70.2452, 3.28658, -0.53594)
 
 [node name="Wall3" parent="." instance=ExtResource("2_idjqp")]
-transform = Transform3D(-17.3186, 0, -2.11669e-07, 0, 7.00689, 0, 1.51404e-06, 0, -2.42122, 4.28034, 3.28658, 8.03662)
+transform = Transform3D(-125.039, 0, -2.11669e-07, 0, 7.00689, 0, 1.09313e-05, 0, -2.42122, -14.2075, 3.28658, 8.03662)
+
+[node name="Wall4" parent="." instance=ExtResource("2_idjqp")]
+transform = Transform3D(82.0788, 0, -7.53175e-13, 0, 7.00689, 0, 0, 0, 2.42122, -41.6864, 3.28658, -9.20902)
 
 [node name="Floor" type="StaticBody3D" parent="."]
-transform = Transform3D(-17.3186, 1.51369e-06, 7.53175e-13, 0, -7.56845e-07, 2.42122, 1.51404e-06, 17.3146, 1.05835e-07, 4.28034, 0.019926, -0.557428)
+transform = Transform3D(-568.753, 1.51368e-06, 7.53175e-13, 0, -7.56838e-07, 2.42122, 4.9722e-05, 17.3144, 1.05835e-07, 4.28034, 0.019926, -0.557428)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
 material_override = SubResource("StandardMaterial3D_r3lo5")
@@ -55,7 +58,7 @@ mesh = SubResource("QuadMesh_c3mwy")
 shape = SubResource("ConcavePolygonShape3D_c3mwy")
 
 [node name="Celling" type="StaticBody3D" parent="."]
-transform = Transform3D(17.3186, 1.5054e-06, -1.78814e-07, -1.43051e-06, -7.52701e-07, -2.42122, -1.51404e-06, 17.2198, -1.05835e-07, 4.28034, 6.80129, -0.569511)
+transform = Transform3D(5745.33, 1.50544e-06, -1.78809e-07, -0.000474562, -7.52723e-07, -2.42115, -0.000502273, 17.2203, -1.05832e-07, 4.28034, 6.80129, -0.569511)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Celling"]
 mesh = SubResource("QuadMesh_c3mwy")
@@ -63,15 +66,12 @@ mesh = SubResource("QuadMesh_c3mwy")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Celling"]
 shape = SubResource("ConcavePolygonShape3D_c3mwy")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.20018, 4.11827, 0)
-light_color = Color(0.907106, 0.894594, 0.724706, 1)
-light_energy = 2.467
-light_indirect_energy = 9.72
-light_volumetric_fog_energy = 3.41
-light_size = 0.8
-light_specular = 1.56
-shadow_enabled = true
-omni_range = 17.8623
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -68.7899, 2.2716, 0)
+light_energy = 16.0
+light_size = 62.77
+light_specular = 8.04
+spot_range = 132.625
+spot_angle = 31.1713
 
 [editable path="Wall"]

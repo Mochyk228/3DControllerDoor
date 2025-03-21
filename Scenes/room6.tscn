@@ -1,17 +1,17 @@
-[gd_scene load_steps=9 format=3 uid="uid://bcnw55wxfkuvv"]
+[gd_scene load_steps=9 format=3 uid="uid://b7qrhs42ekdyl"]
 
-[ext_resource type="Texture2D" uid="uid://cm3uh3ws3bwtk" path="res://Materials/Room1/Plaster002_1K-JPG/Plaster002_1K-JPG_Color.jpg" id="1_ue16m"]
-[ext_resource type="PackedScene" uid="uid://r74cyop5l67t" path="res://Scenes/wall.tscn" id="2_s38dd"]
-[ext_resource type="Texture2D" uid="uid://chen8qgt8qbdk" path="res://Materials/Room1/Tiles074_1K-PNG/Tiles074_1K-PNG_Color.png" id="3_3x6hs"]
+[ext_resource type="Texture2D" uid="uid://cm3uh3ws3bwtk" path="res://Materials/Room1/Plaster002_1K-JPG/Plaster002_1K-JPG_Color.jpg" id="1_xs063"]
+[ext_resource type="PackedScene" uid="uid://r74cyop5l67t" path="res://Scenes/wall.tscn" id="2_jxur4"]
+[ext_resource type="Texture2D" uid="uid://chen8qgt8qbdk" path="res://Materials/Room1/Tiles074_1K-PNG/Tiles074_1K-PNG_Color.png" id="3_kioao"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ckhy6"]
-albedo_texture = ExtResource("1_ue16m")
+albedo_texture = ExtResource("1_xs063")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dun2r"]
-albedo_texture = ExtResource("1_ue16m")
+albedo_texture = ExtResource("1_xs063")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r3lo5"]
-albedo_texture = ExtResource("3_3x6hs")
+albedo_texture = ExtResource("3_kioao")
 roughness = 0.08
 
 [sub_resource type="QuadMesh" id="QuadMesh_c3mwy"]
@@ -32,23 +32,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.984771, -0.6819, -0.2154)
 operation = 2
 size = Vector3(4.8811, 6.10614, 2.40771)
 
-[node name="Wall" parent="." instance=ExtResource("2_s38dd")]
+[node name="Wall" parent="." instance=ExtResource("2_jxur4")]
 transform = Transform3D(-7.5702e-07, 0, -2.42122, 0, 7.00689, 0, 17.3186, 0, -1.05835e-07, 12.2431, 3.28658, -0.478575)
 
 [node name="MeshInstance3D" parent="Wall" index="0"]
 material_override = SubResource("StandardMaterial3D_dun2r")
 
-[node name="Wall2" parent="." instance=ExtResource("2_s38dd")]
+[node name="Wall2" parent="." instance=ExtResource("2_jxur4")]
 transform = Transform3D(-7.5702e-07, 0, 2.42122, 0, 7.00689, 0, -17.3186, 0, -1.05835e-07, -4.39565, 3.28658, -0.53594)
 
-[node name="Wall3" parent="." instance=ExtResource("2_s38dd")]
-transform = Transform3D(-17.3186, 0, -2.11669e-07, 0, 7.00689, 0, 1.51404e-06, 0, -2.42122, 4.28034, 3.28658, 8.03662)
-
-[node name="Wall4" parent="." instance=ExtResource("2_s38dd")]
-transform = Transform3D(-17.3186, 0, -2.11669e-07, 0, 7.00689, 0, 1.51404e-06, 0, -2.42122, 4.28034, 7.82145, -9.46169)
+[node name="Wall3" parent="." instance=ExtResource("2_jxur4")]
+transform = Transform3D(-17.3186, 0, -2.11669e-07, 0, 7.00689, 0, 1.51404e-06, 0, -2.42122, 4.28034, 3.33675, -8.7253)
 
 [node name="Floor" type="StaticBody3D" parent="."]
-transform = Transform3D(17.303, 1.51369e-06, -0.102741, -0.734891, -7.56845e-07, -2.41904, -1.5448e-06, 17.3146, -9.67575e-08, 4.54526, 4.96582, -0.557428)
+transform = Transform3D(-17.3186, 1.51369e-06, 7.53175e-13, 0, -7.56845e-07, 2.42122, 1.51404e-06, 17.3146, 1.05835e-07, 4.28034, 0.019926, -0.557428)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
 material_override = SubResource("StandardMaterial3D_r3lo5")
@@ -58,7 +55,7 @@ mesh = SubResource("QuadMesh_c3mwy")
 shape = SubResource("ConcavePolygonShape3D_c3mwy")
 
 [node name="Celling" type="StaticBody3D" parent="."]
-transform = Transform3D(-17.3186, 1.5054e-06, -3.28558e-08, -8.353e-08, -7.52701e-07, 2.42122, 1.51403e-06, 17.2198, 1.05835e-07, 4.28034, -0.0441911, -0.569511)
+transform = Transform3D(17.3186, 1.5054e-06, -1.78814e-07, -1.43051e-06, -7.52701e-07, -2.42122, -1.51404e-06, 17.2198, -1.05835e-07, 4.28034, 6.80129, -0.569511)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Celling"]
 mesh = SubResource("QuadMesh_c3mwy")
@@ -68,8 +65,8 @@ shape = SubResource("ConcavePolygonShape3D_c3mwy")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.20018, 4.11827, 0)
-light_color = Color(0.154532, 0.441913, 0.642581, 1)
-light_energy = 8.157
+light_color = Color(0.907106, 0.894594, 0.724706, 1)
+light_energy = 2.467
 light_indirect_energy = 9.72
 light_volumetric_fog_energy = 3.41
 light_size = 0.8

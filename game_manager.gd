@@ -9,6 +9,9 @@ signal OnDoorBackwardUpdate
 const ROOM_2 : PackedScene = preload("res://Scenes/room2.tscn")
 const ROOM_1 : PackedScene = preload("res://Scenes/room1.tscn")
 const ROOM_3 : PackedScene = preload("res://Scenes/room3.tscn")
+const ROOM_4 : PackedScene = preload("res://Scenes/room4.tscn")
+const ROOM_5 : PackedScene = preload("res://Scenes/room5.tscn")
+const ROOM_6 : PackedScene = preload("res://Scenes/room6.tscn")
 
 @onready var room_1: Node3D = get_node("/root/Root/Room1")
 @onready var room_2: Node3D = get_node("/root/Root/Room2")
@@ -45,6 +48,6 @@ func backward_room():
 	add_child(room_1)
 	
 func rand_room():
-	var rooms = [ROOM_1, ROOM_2, ROOM_3]
-	var rand_num = randi_range(0, 2)
+	var rooms = [ROOM_1, ROOM_2, ROOM_3, ROOM_4, ROOM_5, ROOM_6]
+	var rand_num = randi_range(0, 5)
 	return rooms[rand_num]
