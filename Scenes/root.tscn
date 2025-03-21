@@ -1,17 +1,15 @@
-[gd_scene load_steps=29 format=3 uid="uid://csqu55gg3yopn"]
+[gd_scene load_steps=31 format=3 uid="uid://csqu55gg3yopn"]
 
-[ext_resource type="Texture2D" uid="uid://w60byu3yb587" path="res://Sprites/222_.png" id="1_i04dx"]
 [ext_resource type="PackedScene" uid="uid://bkg3tistv4aru" path="res://Scenes/player.tscn" id="2_c3mwy"]
+[ext_resource type="Material" uid="uid://rgldx4xah8gh" path="res://Materials/first_mat.tres" id="2_qtxxq"]
 [ext_resource type="Texture2D" uid="uid://0t0ir0213arq" path="res://Materials/Door/Metal055A_1K-JPG/Metal055A.png" id="4_4g5cr"]
 [ext_resource type="Script" uid="uid://chvi7hbnxquca" path="res://Scripts/ui.gd" id="4_c3mwy"]
 [ext_resource type="PackedScene" uid="uid://4t8jsn2b6666" path="res://Scenes/room1.tscn" id="5_4g5cr"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vnucn"]
-albedo_texture = ExtResource("1_i04dx")
-uv1_scale = Vector3(2000, 2000, 2000)
+[ext_resource type="Texture2D" uid="uid://barea66djyd44" path="res://Materials/Door/Fabric080_1K-JPG/Fabric080.png" id="5_r3lo5"]
+[ext_resource type="Texture2D" uid="uid://dqby8asvbfbcc" path="res://Materials/Door/Bark014_1K-JPG/Bark014.png" id="6_qtxxq"]
+[ext_resource type="Texture2D" uid="uid://8jae5v7kblfc" path="res://Materials/Door/Rubber004_1K-JPG/Rubber004.png" id="7_8fnbn"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_c3mwy"]
-material = SubResource("StandardMaterial3D_vnucn")
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_8pvmw"]
 data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
@@ -20,22 +18,6 @@ data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0
 albedo_color = Color(0.376505, 0.675456, 0.860363, 1)
 emission = Color(0.121338, 0.167799, 0.174699, 1)
 emission_energy_multiplier = 9.88
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_h7j2x"]
-noise_type = 0
-frequency = 0.834
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_h7j2x"]
-as_normal_map = true
-noise = SubResource("FastNoiseLite_h7j2x")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h7j2x"]
-transparency = 1
-albedo_color = Color(0.743619, 0.445023, 0.256745, 1)
-metallic = 0.49
-metallic_specular = 0.46
-normal_enabled = true
-normal_texture = SubResource("NoiseTexture2D_h7j2x")
 
 [sub_resource type="Animation" id="Animation_4g5cr"]
 length = 0.001
@@ -162,7 +144,21 @@ gradient = SubResource("Gradient_4g5cr")
 font_size = 26
 
 [sub_resource type="LabelSettings" id="LabelSettings_4g5cr"]
-font_size = 54
+font_size = 47
+
+[sub_resource type="LabelSettings" id="LabelSettings_ckhy6"]
+font_size = 47
+font_color = Color(0.667499, 0.544386, 0.790175, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_r3lo5"]
+font_size = 47
+font_color = Color(0.71778, 0.191889, 0.293872, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_qtxxq"]
+font_size = 47
+font_color = Color(0.9943, 0.831632, 0.629954, 1)
+outline_size = 13
+outline_color = Color(0.613033, 0.447151, 0.164437, 1)
 
 [node name="Root" type="Node3D"]
 
@@ -196,7 +192,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.146, 2.848, 0)
 operation = 2
 use_collision = true
 size = Vector3(4.8811, 6.10614, 2.40771)
-material = SubResource("StandardMaterial3D_h7j2x")
+material = ExtResource("2_qtxxq")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="World/Door/CSGBox3D3"]
 libraries = {
@@ -211,7 +207,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18854, 0)
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Enviroment"]
 environment = SubResource("Environment_vnucn")
 
-[node name="UI" type="Control" parent="." node_paths=PackedStringArray("player")]
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("door", "player")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -219,14 +215,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_c3mwy")
+door = NodePath("../World/Door/CSGBox3D3")
 player = NodePath("../Player")
 
 [node name="Score" type="Label" parent="UI"]
 layout_mode = 0
-offset_left = 14.0
-offset_top = 6.0
-offset_right = 263.0
-offset_bottom = 97.0
+offset_left = 28.0
+offset_top = 10.0
+offset_right = 277.0
+offset_bottom = 101.0
 text = "Score: 0"
 label_settings = SubResource("LabelSettings_c3mwy")
 
@@ -277,7 +274,8 @@ offset_bottom = 85.0
 text = "E INTERACT"
 label_settings = SubResource("LabelSettings_dun2r")
 
-[node name="Panel" type="Panel" parent="UI"]
+[node name="Slots" type="Panel" parent="UI"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -285,7 +283,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="UI/Panel"]
+[node name="Slot1" type="Control" parent="UI/Slots"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UI/Slots/Slot1"]
 modulate = Color(0.646421, 0.336908, 0.324895, 1)
 self_modulate = Color(0.63721, 0.190219, 0.441572, 1)
 layout_mode = 1
@@ -294,63 +300,293 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -528.0
-offset_top = -217.0
-offset_right = -488.0
-offset_bottom = -215.0
+offset_left = -552.0
+offset_top = -210.0
+offset_right = -512.0
+offset_bottom = -208.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(6.18149, 234.792)
 
-[node name="Button" type="Button" parent="UI/Panel"]
+[node name="Button1" type="Button" parent="UI/Slots/Slot1"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -447.0
-offset_top = 156.0
-offset_right = -357.0
-offset_bottom = 221.0
+offset_left = -471.0
+offset_top = 163.0
+offset_right = -381.0
+offset_bottom = 228.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 41
 text = "BUY"
 
-[node name="TextureRect" type="TextureRect" parent="UI/Panel"]
+[node name="TextureRect" type="TextureRect" parent="UI/Slots/Slot1"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -513.0
-offset_top = -88.0
-offset_right = 511.0
-offset_bottom = 936.0
+offset_left = -537.0
+offset_top = -81.0
+offset_right = 487.0
+offset_bottom = 943.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.21, 0.21)
 texture = ExtResource("4_4g5cr")
 
-[node name="Label" type="Label" parent="UI/Panel"]
+[node name="Label" type="Label" parent="UI/Slots/Slot1"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -526.0
-offset_top = -177.0
-offset_right = -278.0
-offset_bottom = -100.0
+offset_left = -531.0
+offset_top = -162.0
+offset_right = -283.0
+offset_bottom = -85.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "10 Points"
+text = "5 Points"
 label_settings = SubResource("LabelSettings_4g5cr")
+
+[node name="Slot2" type="Control" parent="UI/Slots"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 281.0
+offset_right = 281.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UI/Slots/Slot2"]
+modulate = Color(0.646421, 0.336908, 0.324895, 1)
+self_modulate = Color(0.63721, 0.190219, 0.441572, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -552.0
+offset_top = -210.0
+offset_right = -512.0
+offset_bottom = -208.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(6.18149, 234.792)
+
+[node name="Button2" type="Button" parent="UI/Slots/Slot2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -471.0
+offset_top = 163.0
+offset_right = -381.0
+offset_bottom = 228.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 41
+text = "BUY"
+
+[node name="TextureRect" type="TextureRect" parent="UI/Slots/Slot2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -537.0
+offset_top = -81.0
+offset_right = 487.0
+offset_bottom = 943.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.21, 0.21)
+texture = ExtResource("5_r3lo5")
+
+[node name="Label" type="Label" parent="UI/Slots/Slot2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -537.0
+offset_top = -160.0
+offset_right = -289.0
+offset_bottom = -83.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "25 Points"
+label_settings = SubResource("LabelSettings_ckhy6")
+
+[node name="Slot3" type="Control" parent="UI/Slots"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 569.0
+offset_right = 569.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UI/Slots/Slot3"]
+modulate = Color(0.646421, 0.336908, 0.324895, 1)
+self_modulate = Color(0.63721, 0.190219, 0.441572, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -544.0
+offset_top = -209.0
+offset_right = -504.0
+offset_bottom = -207.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(6.18149, 234.792)
+
+[node name="Button3" type="Button" parent="UI/Slots/Slot3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -471.0
+offset_top = 163.0
+offset_right = -381.0
+offset_bottom = 228.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 41
+text = "BUY"
+
+[node name="TextureRect" type="TextureRect" parent="UI/Slots/Slot3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -537.0
+offset_top = -81.0
+offset_right = 487.0
+offset_bottom = 943.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.21, 0.21)
+texture = ExtResource("6_qtxxq")
+
+[node name="Label" type="Label" parent="UI/Slots/Slot3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -549.0
+offset_top = -163.0
+offset_right = -301.0
+offset_bottom = -86.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "100 Points"
+label_settings = SubResource("LabelSettings_r3lo5")
+
+[node name="Slot4" type="Control" parent="UI/Slots"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 854.0
+offset_right = 854.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UI/Slots/Slot4"]
+modulate = Color(0.646421, 0.336908, 0.324895, 1)
+self_modulate = Color(0.63721, 0.190219, 0.441572, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -552.0
+offset_top = -210.0
+offset_right = -512.0
+offset_bottom = -208.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(6.18149, 234.792)
+
+[node name="Button4" type="Button" parent="UI/Slots/Slot4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -471.0
+offset_top = 163.0
+offset_right = -381.0
+offset_bottom = 228.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 41
+text = "BUY"
+
+[node name="TextureRect" type="TextureRect" parent="UI/Slots/Slot4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -537.0
+offset_top = -81.0
+offset_right = 487.0
+offset_bottom = 943.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.21, 0.21)
+texture = ExtResource("7_8fnbn")
+
+[node name="Label" type="Label" parent="UI/Slots/Slot4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -539.0
+offset_top = -164.0
+offset_right = -239.0
+offset_bottom = -87.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "500 Points"
+label_settings = SubResource("LabelSettings_qtxxq")
 
 [node name="Room1" parent="." instance=ExtResource("5_4g5cr")]
 
 [node name="Room2" parent="." instance=ExtResource("5_4g5cr")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 6.22791, 0, -19.3803)
+
+[connection signal="pressed" from="UI/Slots/Slot1/Button1" to="UI" method="_on_button_1_pressed"]
+[connection signal="pressed" from="UI/Slots/Slot2/Button2" to="UI" method="_on_button_2_pressed"]
+[connection signal="pressed" from="UI/Slots/Slot3/Button3" to="UI" method="_on_button_3_pressed"]
+[connection signal="pressed" from="UI/Slots/Slot4/Button4" to="UI" method="_on_button_4_pressed"]

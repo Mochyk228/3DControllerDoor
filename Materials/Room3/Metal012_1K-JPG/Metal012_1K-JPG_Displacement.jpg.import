@@ -2,27 +2,26 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7egm5yhj3p7q"
-path.s3tc="res://.godot/imported/Rubber004_1K-JPG_Color.jpg-097cc2502f64f9b5dfc2ab26ad518cbf.s3tc.ctex"
+uid="uid://cathc4v481u5w"
+path="res://.godot/imported/Metal012_1K-JPG_Displacement.jpg-9109dc779052ee2365abe14aac8bf9aa.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://Materials/Door/Rubber004_1K-JPG/Rubber004_1K-JPG_Color.jpg"
-dest_files=["res://.godot/imported/Rubber004_1K-JPG_Color.jpg-097cc2502f64f9b5dfc2ab26ad518cbf.s3tc.ctex"]
+source_file="res://Materials/Room3/Metal012_1K-JPG/Metal012_1K-JPG_Displacement.jpg"
+dest_files=["res://.godot/imported/Metal012_1K-JPG_Displacement.jpg-9109dc779052ee2365abe14aac8bf9aa.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -32,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

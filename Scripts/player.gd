@@ -3,7 +3,7 @@ extends CharacterBody3D
 signal OnHoverUpdateStart
 signal OnHoverUpdateEnd
 
-@export var move_speed : float = 5.0
+@export var move_speed : float = 7.5
 @export var gravity : float = 15.0
 @export var jump_velocity : float = 9.0
 @export var mouse_sensitivity : float = 0.5
@@ -33,7 +33,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _input(event):
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and not GameManager.is_shopping:
 		rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity)) # translate mouse position on x to rotation of player
 		head.rotate_x(deg_to_rad(-event.relative.y * mouse_sensitivity))
 		head.rotation_degrees.x = clampf(head.rotation_degrees.x, -80, 80)

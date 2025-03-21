@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7egm5yhj3p7q"
-path.s3tc="res://.godot/imported/Rubber004_1K-JPG_Color.jpg-097cc2502f64f9b5dfc2ab26ad518cbf.s3tc.ctex"
+uid="uid://baidv3t03mi76"
+path.s3tc="res://.godot/imported/Metal012_1K-JPG_Color.jpg-da85950cd175eb270dcc4e395f31e14a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Materials/Door/Rubber004_1K-JPG/Rubber004_1K-JPG_Color.jpg"
-dest_files=["res://.godot/imported/Rubber004_1K-JPG_Color.jpg-097cc2502f64f9b5dfc2ab26ad518cbf.s3tc.ctex"]
+source_file="res://Materials/Room3/Metal012_1K-JPG/Metal012_1K-JPG_Color.jpg"
+dest_files=["res://.godot/imported/Metal012_1K-JPG_Color.jpg-da85950cd175eb270dcc4e395f31e14a.s3tc.ctex"]
 
 [params]
 

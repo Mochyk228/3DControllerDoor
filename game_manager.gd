@@ -1,12 +1,14 @@
 extends Node3D
 
 var score : int = 0
+var is_shopping : bool = false
 
 signal OnDoorForwardUpdate
 signal OnDoorBackwardUpdate
 
 const ROOM_2 : PackedScene = preload("res://Scenes/room2.tscn")
 const ROOM_1 : PackedScene = preload("res://Scenes/room1.tscn")
+const ROOM_3 : PackedScene = preload("res://Scenes/room3.tscn")
 
 @onready var room_1: Node3D = get_node("/root/Root/Room1")
 @onready var room_2: Node3D = get_node("/root/Root/Room2")
@@ -43,6 +45,6 @@ func backward_room():
 	add_child(room_1)
 	
 func rand_room():
-	var rooms = [ROOM_1, ROOM_2]
-	var rand_num = randi_range(0, 1)
+	var rooms = [ROOM_1, ROOM_2, ROOM_3]
+	var rand_num = randi_range(0, 2)
 	return rooms[rand_num]
