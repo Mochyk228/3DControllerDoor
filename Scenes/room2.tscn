@@ -1,0 +1,115 @@
+[gd_scene load_steps=14 format=3 uid="uid://b6ipn1d6dj63o"]
+
+[ext_resource type="Texture2D" uid="uid://dcyh1fkl67t2n" path="res://Materials/Room2/Tiles085_1K-JPG/Tiles085_1K-JPG_Color.jpg" id="1_mjn56"]
+[ext_resource type="PackedScene" uid="uid://r74cyop5l67t" path="res://Scenes/wall.tscn" id="2_p7ttq"]
+[ext_resource type="Texture2D" uid="uid://cpk0gpus84db4" path="res://Materials/Room2/Lava001_1K-JPG/Lava001_1K-JPG_Color.jpg" id="3_mjn56"]
+[ext_resource type="Texture2D" uid="uid://db3j0tltkek0r" path="res://Materials/Room2/Lava001_1K-JPG/Lava001_1K-JPG_Emission.jpg" id="4_b2s5g"]
+[ext_resource type="Texture2D" uid="uid://cwko75uhshrh1" path="res://Materials/Room2/Lava001_1K-JPG/Lava001_1K-JPG_NormalDX.jpg" id="5_dl1m8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b2s5g"]
+albedo_texture = ExtResource("1_mjn56")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dl1m8"]
+albedo_texture = ExtResource("1_mjn56")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2rppd"]
+albedo_texture = ExtResource("1_mjn56")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4yq2u"]
+albedo_texture = ExtResource("1_mjn56")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_53ype"]
+albedo_texture = ExtResource("3_mjn56")
+emission_enabled = true
+emission_energy_multiplier = 14.5
+emission_texture = ExtResource("4_b2s5g")
+normal_enabled = true
+normal_texture = ExtResource("5_dl1m8")
+
+[sub_resource type="QuadMesh" id="QuadMesh_c3mwy"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_c3mwy"]
+data = PackedVector3Array(0.5, -0.5, 0, -0.5, -0.5, 0, 0.5, 0.5, 0, -0.5, -0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hbc0m"]
+albedo_texture = ExtResource("1_mjn56")
+
+[node name="Room" type="Node3D"]
+
+[node name="FrontWall" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.339924, 4.13036, 3.52972, -9.2751)
+material_override = SubResource("StandardMaterial3D_b2s5g")
+use_collision = true
+size = Vector3(17.3379, 7.1615, 1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="FrontWall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.984771, -0.6819, -0.2154)
+operation = 2
+size = Vector3(4.8811, 6.10614, 2.40771)
+
+[node name="Wall" parent="." instance=ExtResource("2_p7ttq")]
+transform = Transform3D(-7.5702e-07, 0, -2.42122, 0, 7.00689, 0, 17.3186, 0, -1.05835e-07, 12.2431, 3.28658, -0.478575)
+
+[node name="MeshInstance3D" parent="Wall" index="0"]
+material_override = SubResource("StandardMaterial3D_dl1m8")
+
+[node name="Wall2" parent="." instance=ExtResource("2_p7ttq")]
+transform = Transform3D(-7.5702e-07, 0, 2.42122, 0, 7.00689, 0, -17.3186, 0, -1.05835e-07, -4.39565, 3.28658, -0.53594)
+
+[node name="MeshInstance3D" parent="Wall2" index="0"]
+material_override = SubResource("StandardMaterial3D_2rppd")
+
+[node name="Wall3" parent="." instance=ExtResource("2_p7ttq")]
+transform = Transform3D(-17.3186, 0, -2.11669e-07, 0, 7.00689, 0, 1.51404e-06, 0, -2.42122, 4.28034, 3.28658, 8.03662)
+
+[node name="MeshInstance3D" parent="Wall3" index="0"]
+material_override = SubResource("StandardMaterial3D_4yq2u")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(-17.3186, 1.51369e-06, 7.53175e-13, 0, -7.56845e-07, 2.42122, 1.51404e-06, 17.3146, 1.05835e-07, 4.28034, 0.019926, -0.557428)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+material_override = SubResource("StandardMaterial3D_53ype")
+mesh = SubResource("QuadMesh_c3mwy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("ConcavePolygonShape3D_c3mwy")
+
+[node name="Celling" type="StaticBody3D" parent="."]
+transform = Transform3D(17.3186, 1.5054e-06, -1.78814e-07, -1.43051e-06, -7.52701e-07, -2.42122, -1.51404e-06, 17.2198, -1.05835e-07, 4.28034, 6.80129, -0.569511)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Celling"]
+material_override = SubResource("StandardMaterial3D_hbc0m")
+mesh = SubResource("QuadMesh_c3mwy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Celling"]
+shape = SubResource("ConcavePolygonShape3D_c3mwy")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.43578, 4.11827, 0)
+light_color = Color(0.66463, 0.543859, 0.91079, 1)
+light_energy = 6.947
+light_indirect_energy = 9.72
+light_volumetric_fog_energy = 5.094
+light_size = 0.8
+light_negative = true
+light_specular = 1.56
+shadow_enabled = true
+omni_range = 10.474
+omni_attenuation = -0.978
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.43578, -0.0771742, 0)
+light_color = Color(0.785762, 0.391264, 0.271215, 1)
+light_energy = 9.754
+light_indirect_energy = 10.27
+light_volumetric_fog_energy = 11.457
+light_size = 0.8
+light_specular = 1.56
+shadow_enabled = true
+omni_range = 10.996
+omni_attenuation = 0.192
+
+[editable path="Wall"]
+[editable path="Wall2"]
+[editable path="Wall3"]

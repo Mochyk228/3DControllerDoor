@@ -14,13 +14,12 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _physics_process(delta):
-	
 	# gravity
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 	
 	# jump
-	if is_on_floor and Input.is_action_just_pressed("jump"):
+	if is_on_floor() and Input.is_action_just_pressed("jump"):
 		velocity.y = jump_velocity
 	
 	# move
