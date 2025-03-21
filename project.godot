@@ -15,6 +15,10 @@ run/main_scene="uid://csqu55gg3yopn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://Sprites/icon.svg"
 
+[autoload]
+
+GameManager="*res://game_manager.gd"
+
 [input]
 
 left={

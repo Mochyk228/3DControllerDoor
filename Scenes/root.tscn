@@ -1,9 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://csqu55gg3yopn"]
+[gd_scene load_steps=29 format=3 uid="uid://csqu55gg3yopn"]
 
-[ext_resource type="Script" uid="uid://nb3obpt65dcd" path="res://game_manager.gd" id="1_ckhy6"]
 [ext_resource type="Texture2D" uid="uid://w60byu3yb587" path="res://Sprites/222_.png" id="1_i04dx"]
 [ext_resource type="PackedScene" uid="uid://bkg3tistv4aru" path="res://Scenes/player.tscn" id="2_c3mwy"]
-[ext_resource type="PackedScene" uid="uid://c1bltlw2c1k8g" path="res://Scenes/door.tscn" id="4_4g5cr"]
+[ext_resource type="Texture2D" uid="uid://0t0ir0213arq" path="res://Materials/Door/Metal055A_1K-JPG/Metal055A.png" id="4_4g5cr"]
 [ext_resource type="Script" uid="uid://chvi7hbnxquca" path="res://Scripts/ui.gd" id="4_c3mwy"]
 [ext_resource type="PackedScene" uid="uid://4t8jsn2b6666" path="res://Scenes/room1.tscn" id="5_4g5cr"]
 
@@ -21,6 +20,106 @@ data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0
 albedo_color = Color(0.376505, 0.675456, 0.860363, 1)
 emission = Color(0.121338, 0.167799, 0.174699, 1)
 emission_energy_multiplier = 9.88
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_h7j2x"]
+noise_type = 0
+frequency = 0.834
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_h7j2x"]
+as_normal_map = true
+noise = SubResource("FastNoiseLite_h7j2x")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h7j2x"]
+transparency = 1
+albedo_color = Color(0.743619, 0.445023, 0.256745, 1)
+metallic = 0.49
+metallic_specular = 0.46
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_h7j2x")
+
+[sub_resource type="Animation" id="Animation_4g5cr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vnucn"]
+resource_name = "close_door"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.5708, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_w6aom"]
+resource_name = "close_door_back"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, -1.5708, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_c3mwy"]
+resource_name = "open_door"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.5708, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_h7j2x"]
+resource_name = "open_door_back"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -1.5708, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4g5cr"]
+_data = {
+&"RESET": SubResource("Animation_4g5cr"),
+&"close_door": SubResource("Animation_vnucn"),
+&"close_door_back": SubResource("Animation_w6aom"),
+&"open_door": SubResource("Animation_c3mwy"),
+&"open_door_back": SubResource("Animation_h7j2x")
+}
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_i04dx"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -42,6 +141,9 @@ fog_enabled = true
 fog_light_color = Color(0.241285, 0.19333, 0.0612054, 1)
 fog_density = 0.004
 
+[sub_resource type="LabelSettings" id="LabelSettings_c3mwy"]
+font_size = 49
+
 [sub_resource type="Gradient" id="Gradient_c3mwy"]
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 1, 1, 0.270588)
@@ -59,8 +161,10 @@ gradient = SubResource("Gradient_4g5cr")
 [sub_resource type="LabelSettings" id="LabelSettings_dun2r"]
 font_size = 26
 
+[sub_resource type="LabelSettings" id="LabelSettings_4g5cr"]
+font_size = 54
+
 [node name="Root" type="Node3D"]
-script = ExtResource("1_ckhy6")
 
 [node name="World" type="Node" parent="."]
 
@@ -84,8 +188,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.984771, -0.6819, -0.2154)
 operation = 2
 size = Vector3(4.8811, 6.10614, 2.40771)
 
-[node name="Door" parent="World" instance=ExtResource("4_4g5cr")]
+[node name="Door" type="Node3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.55027)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="World/Door" groups=["Door"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.146, 2.848, 0)
+operation = 2
+use_collision = true
+size = Vector3(4.8811, 6.10614, 2.40771)
+material = SubResource("StandardMaterial3D_h7j2x")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="World/Door/CSGBox3D3"]
+libraries = {
+&"": SubResource("AnimationLibrary_4g5cr")
+}
 
 [node name="Player" parent="." instance=ExtResource("2_c3mwy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18854, 0)
@@ -104,6 +220,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_c3mwy")
 player = NodePath("../Player")
+
+[node name="Score" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 6.0
+offset_right = 263.0
+offset_bottom = 97.0
+text = "Score: 0"
+label_settings = SubResource("LabelSettings_c3mwy")
 
 [node name="Crosshair" type="TextureRect" parent="UI"]
 layout_mode = 1
@@ -151,6 +276,79 @@ offset_right = 328.0
 offset_bottom = 85.0
 text = "E INTERACT"
 label_settings = SubResource("LabelSettings_dun2r")
+
+[node name="Panel" type="Panel" parent="UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UI/Panel"]
+modulate = Color(0.646421, 0.336908, 0.324895, 1)
+self_modulate = Color(0.63721, 0.190219, 0.441572, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -528.0
+offset_top = -217.0
+offset_right = -488.0
+offset_bottom = -215.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(6.18149, 234.792)
+
+[node name="Button" type="Button" parent="UI/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -447.0
+offset_top = 156.0
+offset_right = -357.0
+offset_bottom = 221.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 41
+text = "BUY"
+
+[node name="TextureRect" type="TextureRect" parent="UI/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -513.0
+offset_top = -88.0
+offset_right = 511.0
+offset_bottom = 936.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.21, 0.21)
+texture = ExtResource("4_4g5cr")
+
+[node name="Label" type="Label" parent="UI/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -526.0
+offset_top = -177.0
+offset_right = -278.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "10 Points"
+label_settings = SubResource("LabelSettings_4g5cr")
 
 [node name="Room1" parent="." instance=ExtResource("5_4g5cr")]
 

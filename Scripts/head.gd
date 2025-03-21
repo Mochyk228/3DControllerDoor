@@ -19,10 +19,12 @@ func _physics_process(delta):
 					object.get_child(0).play("open_door_back")
 					is_open = true
 					is_backward = true
+					GameManager.OnDoorBackwardUpdate.emit()
 				else:
 					object.get_child(0).play("open_door")
 					is_open = true
 					is_forwad = true
+					GameManager.OnDoorForwardUpdate.emit()
 			else:
 				if is_backward:
 					object.get_child(0).play("close_door_back")
